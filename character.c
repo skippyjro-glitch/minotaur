@@ -18,6 +18,7 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
 
 int move_character(int * y, int * x, char direction, char character) {
     int invalid_direction;
+    char player_direction;
     
     // check for an invalid direction (not LEFT, RIGHT, UP, or DOWN)
     invalid_direction = check_direction(player_direction);
