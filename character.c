@@ -4,6 +4,8 @@
 #include "defines.h"
 #include "character.h"
 
+int check_direction(char direction);
+
 extern char * map;
 extern int height;
 extern int width;
@@ -32,11 +34,12 @@ int move_character(int * y, int * x, char direction, char character) {
 }
 
 int check_direction(char direction) {
-    check_direction = 0;
-    int newY=*y;
-    int newX=*x;
+    //int newY=*y;
+    //int newX=*x;
 
-    switch(direction){
+    return 0;
+
+    /* switch(direction){
         case 'w':
             newY-=1;
             break;
@@ -50,7 +53,7 @@ int check_direction(char direction) {
             newX+=1;
             break
         default:
-            return MOVED_INVALID_DIRECTION;
+            return MOVED_INVALID_DIRECTION; */
     }
 }
 
