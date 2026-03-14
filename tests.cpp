@@ -43,6 +43,9 @@ TEST_SUITE_BEGIN("Character tests");
 
 // tests for move_character
 
+// tests for check_direction
+    CHECK(check_direction('w')==1);
+
 // tests for charge_minotaur
 TEST_SUITE_END();
 
