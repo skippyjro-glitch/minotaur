@@ -1,5 +1,5 @@
 // APSC 142 Engineering Programming Project Starter Code
-// Copyright Sean Kauffman 2026
+// Copyright Sean Kauffman 2024
 
 #include "defines.h"
 #include "game.h"
@@ -23,3 +23,5 @@ int check_loss(int player_y, int player_x, int minotaur_y, int minotaur_x) {
     }
     return KEEP_GOING;
 }
+
+
