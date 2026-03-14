@@ -18,10 +18,9 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
 
 int move_character(int * y, int * x, char direction, char character) {
     int invalid_direction;
-    char player_direction;
     
     // check for an invalid direction (not LEFT, RIGHT, UP, or DOWN)
-    invalid_direction = check_direction(player_direction);
+    invalid_direction = check_direction(direction);
     
     // calculate the new coordinates to use on success (store in local variables)
     // check if the new coordinates point to a wallg
@@ -32,7 +31,7 @@ int move_character(int * y, int * x, char direction, char character) {
     return MOVED_OKAY;
 }
 
-int check_direction(char player_direction) {
+int check_direction(char direction) {
     check_direction = 0;
 }
 
