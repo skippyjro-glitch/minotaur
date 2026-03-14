@@ -31,7 +31,7 @@ int move_character(int * y, int * x, char direction, char character) {
     return MOVED_OKAY;
 }
 
-int check_direction(int * x, in * y) {
+int check_direction(int * x, int * y) {
     check_direction = 0;
 }
 
