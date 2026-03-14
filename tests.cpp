@@ -1,5 +1,5 @@
 // APSC 142 Engineering Programming Project Starter Code
-// Copyright Sean Kauffman 2026
+// Copyright Sean Kauffman 2024
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
@@ -32,6 +32,8 @@ TEST_CASE("A test for load_map") {
     CHECK(0 == 0);
 }
 
+// Tests for is_wall
+
 TEST_SUITE_END();
 
 /* tests for character.c */
@@ -43,13 +45,29 @@ TEST_SUITE_BEGIN("Character tests");
 
 // tests for charge_minotaur
 
-// tests for locate character
-
 /* tests for game.c */
 TEST_SUITE_BEGIN("Game tests");
-
 // tests for check_win
-
+    TEST_CASE("Check for win") {
+    height=12;
+    width=11;
+        CHECK(check_win(12, 11)==1);
+        CHECK(check_win(13, 12)==1);
+        CHECK(check_win(0,0)==1);
+        CHECK(check_win(0,1)==1);
+        CHECK(check_win(1,0)==1);
+        CHECK(check_win(12,10)==1);
+        CHECK(check_win(11, 11)==1);
+        CHECK(check_win(11,10)==0);
+        CHECK(check_win(1,1)==0);
+    }
 // test for check_loss
-
+    TEST_CASE("Check for loss") {
+        CHECK(check_loss(1, 1, 1, 1)==1);
+        CHECK(check_loss(0,0,0,0)==1);
+        CHECK(check_loss(1,0,0,0)==0);
+        CHECK(check_loss(0, 1,0,0)==0);
+        CHECK(check_loss(0,0,1,0)==0);
+        CHECK(check_loss(0,0,0,1)==0);
+    }
 TEST_SUITE_END();
