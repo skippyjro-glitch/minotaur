@@ -43,6 +43,15 @@ int check_direction(char direction) {
         case 's':
             newY+=1;
             break;
+        case 'a':
+            newX-=1;
+            break;
+        case 'd':
+            newX+=1;
+            break
+        default:
+            return MOVED_INVALID_DIRECTION;
+    }
 }
 
 
