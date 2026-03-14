@@ -58,7 +58,7 @@ TEST_SUITE_BEGIN("Game tests");
         CHECK(check_win(1,0)==1);
         CHECK(check_win(12,10)==1);
         CHECK(check_win(11, 11)==1);
-        CHECK(check_win(11,10)==0);
+        CHECK(check_win(10,9)==0);
         CHECK(check_win(1,1)==0);
     }
 // test for check_loss
