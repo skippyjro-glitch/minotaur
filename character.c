@@ -53,8 +53,8 @@ int check_direction(char direction) {
             newX+=1;
             break
         default:
-            return MOVED_INVALID_DIRECTION; */
-    }
+            return MOVED_INVALID_DIRECTION; 
+    } */
 }
 
 
