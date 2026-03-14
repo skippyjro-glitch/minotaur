@@ -44,6 +44,7 @@ TEST_SUITE_BEGIN("Character tests");
 // tests for move_character
 
 // tests for charge_minotaur
+TEST_SUITE_END();
 
 /* tests for game.c */
 TEST_SUITE_BEGIN("Game tests");
