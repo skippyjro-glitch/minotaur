@@ -33,6 +33,16 @@ int move_character(int * y, int * x, char direction, char character) {
 
 int check_direction(char direction) {
     check_direction = 0;
+    int newY=*y;
+    int newX=*x;
+
+    switch(direction){
+        case 'w':
+            newY-=1;
+            break;
+        case 's':
+            newY+=1;
+            break;
 }
 
 
