@@ -1,5 +1,5 @@
 // APSC 142 Engineering Programming Project Starter Code
-// Copyright Sean Kauffman 2026
+// Copyright Sean Kauffman 2024
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,17 +37,52 @@ static void printc(char c) {
 }
 
 void print_map(void) {
+    // Print the map given in the global map variable
+    for (int y = 0; y<height; y++) {
+        for (int x=0; x<width; x++) {
+            printc(map[y*width+x]); //converts 2D coordinate to 1D
+            if (x<width-1) {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+    change_text_colour(WHITE);
 }
-
 
 void print_revealed_map(int player_y, int player_x) {
     // Only the map within PLAYER_VISION_DISTANCE of the player (including diagonals) should be printed
+    for (int y=0; y<height;y++) {
+        for (int x=0; x<width; x++) {
+            int dy = y-player_y; //position - player location in y
+            int dx = x-player_x; //position - player location in x
+            //check if location is within vision bounds
+            if ((dy*dy+dx*dx)<=PLAYER_VISION_DISTANCE*PLAYER_VISION_DISTANCE) {
+                printc(map[y*width+x]);
+            } else {
+                change_text_colour(WHITE); //WHITE shows empty space
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
 
-int locate_character(int* character_y, int* character_x, char character) {
+int locate_character(char character, int* character_y, int* character_x) {
     // Attempt to find the character in the map and return a status code indicating
     // if they were present
-    return FOUND_CHARACTER;
+    for (int y=0; y<height; y++) {
+        for (int x=0; x<width; x++) {
+            //checks if there's a character in the map
+            if (map[y*width+x]==character) {
+                *character_y=y;
+                *character_x=x;
+                return FOUND_CHARACTER;
+            }
+        }
+    }
+    return CHARACTER_NOT_FOUND;
 }
 
 
