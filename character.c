@@ -17,7 +17,11 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
 }
 
 int move_character(int * y, int * x, char direction, char character) {
+    int invalid_direction;
+    
     // check for an invalid direction (not LEFT, RIGHT, UP, or DOWN)
+    invalid_direction = check_direction(* x,* y);
+    
     // calculate the new coordinates to use on success (store in local variables)
     // check if the new coordinates point to a wallg
     // at this point, the move is known to be valid (OK direction and not a wall)
@@ -27,9 +31,15 @@ int move_character(int * y, int * x, char direction, char character) {
     return MOVED_OKAY;
 }
 
+int check_direction(int * x, in * y) {
+    check_direction = 0;
+}
+
+
 int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_direction) {
     // call move_character twice or until a wall is hit
     // when the wall is hit, move the Minotaur into the wall in the direction it is charging
     // calculate the new coordinates
     return MOVED_OKAY;
 }
+
