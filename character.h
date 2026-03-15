@@ -2,6 +2,8 @@
 // Copyright Sean Kauffman 2026
 
 int check_direction(char direction);
+int calculate_newX(*x);
+int calculate_newY(*y);
 
 #ifndef PROJECT_CHARACTER_H
 #define PROJECT_CHARACTER_H
