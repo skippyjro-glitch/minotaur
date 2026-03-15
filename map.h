@@ -5,6 +5,11 @@
 #define PROJECT_MAP_H
 
 /** Functions required to be implemented **/
+int read_file();
+char* create_map_array();
+int update_map_height();
+int update_map_width();
+int update_map_array();
 
 /**
  * Prints the map using the global variables defined in apsc142project.c.
