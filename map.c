@@ -14,6 +14,12 @@
 extern char *map;
 extern int width, height;
 
+int read_file();
+char* create_map_array();
+int update_map_height();
+int update_map_width();
+int update_map_array();
+
 /**
  * You should use this function to print out individual characters
  * in the colours used in the demo.
@@ -88,4 +94,25 @@ int locate_character(char character, int* character_y, int* character_x) {
 
 char *load_map(char *filename, int *map_height, int *map_width) {
     return NULL;
+}
+
+int read_file(){
+    return 0;
+}
+
+char* create_map_array(){
+    static int array[];
+    return array;
+}
+
+int update_map_height(){
+    return 0;
+}
+
+int update_map_width(){
+    return 0;
+}
+
+int update_map_array(){
+    return 0;
 }
