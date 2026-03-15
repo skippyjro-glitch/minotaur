@@ -57,13 +57,13 @@ TEST_SUITE_BEGIN("Character tests");
         CHECK(calculate_newX(10, 'a')==9);
     }
     TEST_CASE("check 'd' makes new x-direction one more than original"){
-        CHECK(calculate_newX(10, 'a')==11);
+        CHECK(calculate_newX(10, 'd')==11);
     }
     TEST_CASE("check 'w' makes new y-direction one more than original"){
-        CHECK(calculate_newX(10, 'a')==11);
+        CHECK(calculate_newX(10, 'w')==11);
     }
     TEST_CASE("check 's' makes new y-direction one less than original"){
-        CHECK(calculate_newX(10, 'a')==9);
+        CHECK(calculate_newX(10, 's')==9);
     }
 // tests for charge_minotaur
 TEST_SUITE_END();
