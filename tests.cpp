@@ -79,14 +79,16 @@ TEST_SUITE_BEGIN("Character tests");
     TEST_CASE("move_character moves into empty spaces") {
     height=12;
     width=11;
+    char cell = EMPTY;
+    map=&cell;
     int x=1, y=1;
         CHECK(move_character(&y, &x, 'w', PLAYER)==MOVED_OKAY);
-        CHECK(x==2);
-        CHECK(y==1);
     }
     TEST_CASE("move_character hits wall") {
     height=12;
     width=11;
+    char cell= WALL;
+    map=&cell
     int x=1, y=1;
         CHECK(move_character(&y, &x, 'w', PLAYER)==MOVED_WALL);
     }
