@@ -42,7 +42,7 @@ int move_character(int * y, int * x, char direction, char character) {
 }
 
 int check_direction(char direction) {
-    if(direction=='w'||direction=='s'||direction=='a'||direction=='d'){
+    if(direction==UP||direction==DOWN||direction==LEFT||direction==RIGHT){
         return 1;
     } else {
         return 0;
@@ -50,19 +50,19 @@ int check_direction(char direction) {
 }
 
 int calculate_newX(int *x, char direction){
-    if(direction=='a'){
+    if(direction==LEFT){
         return *x-1;
     }
-    if(direction=='d'){
+    if(direction==RIGHT){
         return *x+1;
     }
 }
 
 int calculate_newY(int *y, char direction){
-    if(direction=='s'){
+    if(direction==DOWN){
         return *y-1;
     }
-    if(direction=='w'){
+    if(direction==UP){
         return *y+1;
     }
 }
