@@ -5,6 +5,8 @@
 #include "character.h"
 
 int check_direction(char direction);
+int calculate_newX(*x);
+int calculate_newY(*y);
 
 extern char * map;
 extern int height;
@@ -19,7 +21,8 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
 }
 
 int move_character(int * y, int * x, char direction, char character) {
-    int invalid_direction;
+    int newX=0;
+    int newY=0;
     
     // check for an invalid direction (not LEFT, RIGHT, UP, or DOWN)
     if (check_direction(direction)==0){
@@ -27,7 +30,8 @@ int move_character(int * y, int * x, char direction, char character) {
     }
     
     // calculate the new coordinates to use on success (store in local variables)
-    
+    newX=calculate_newX(*x);
+    newY=calculate_newY(*y);
     
     // check if the new coordinates point to a wall
     // at this point, the move is known to be valid (OK direction and not a wall)
@@ -43,6 +47,14 @@ int check_direction(char direction) {
     } else {
         return 0;
     }
+}
+
+int calculate_newX(*x){
+    return 0;
+}
+
+int calculate_newY(*y){
+    return 0;
 }
 
 
