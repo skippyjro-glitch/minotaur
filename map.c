@@ -14,11 +14,11 @@
 extern char *map;
 extern int width, height;
 
-int read_file();
-char* create_map_array();
-int update_map_height();
-int update_map_width();
-int update_map_array();
+int read_file(char *filename);
+char* create_map_array(int size);
+int update_map_height(int *map_height);
+int update_map_width(int *map_width, int count);
+int update_map_array(char **map, int *allocated, int *used, char *row, int width);
 
 /**
  * You should use this function to print out individual characters
@@ -96,22 +96,33 @@ char *load_map(char *filename, int *map_height, int *map_width) {
     return NULL;
 }
 
-int read_file(){
-    return 0;
+int read_file(char *filename){
+    FILE *fp=fopen(filename,"r");
+    if (!fp){
+        return 0;
+    } fclose(fp);
+    return 1;
 }
 
-char* create_map_array(){
-    return 0;
+char* create_map_array(int size){
+    char *maze = malloc(size);
+    if(maze==NULL) return NULL;
+    memset(maze,'.',10);
+    return maze;
 }
 
-int update_map_height(){
-    return 0;
+int update_map_height(int *map_height){
+    (*map_height)++;
+    return *map_height;
 }
 
-int update_map_width(){
-    return 0;
+int update_map_width(int *map_width, int count){
+    if(*map_width==-1){
+        *map_width=count;
+    }
+    return *map_width;
 }
 
-int update_map_array(){
+int update_map_array(char **map, int *allocated, int *used, char *row, int width){
     return 0;
 }
