@@ -76,7 +76,8 @@ int calculate_newY(int *y, char direction){
 }
 
 int check_wall_collision(int newX, int newY){
-    if(map[newY][newX]==WALL){
+    int index = newY*width+newX;
+    if(map[index]==WALL){
         return 1;
     } else {
         return 0;
