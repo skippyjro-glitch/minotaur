@@ -89,7 +89,7 @@ TEST_SUITE_BEGIN("Character tests");
     width=11;
     char cell= WALL;
     map=&cell;
-    int x=1, y=1;
+    int x=0, y=1;
         CHECK(move_character(&y, &x, 'w', PLAYER)==MOVED_WALL);
     }
 // tests for charge_minotaur
