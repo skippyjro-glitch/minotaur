@@ -6,6 +6,8 @@ int calculate_newX(int x, char direction);
 int calculate_newY(int y, char direction);
 int check_wall_collision(int newX, int newY);
 int calculate_index(int x,  int y);
+int check_x_boundary(int x, int width);
+int check_y_boundary(int y, int height);
 
 #ifndef PROJECT_CHARACTER_H
 #define PROJECT_CHARACTER_H
