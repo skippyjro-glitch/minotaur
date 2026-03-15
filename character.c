@@ -5,8 +5,8 @@
 #include "character.h"
 
 int check_direction(char direction);
-int calculate_newX(int *x);
-int calculate_newY(int *y);
+int calculate_newX(int *x, char direction);
+int calculate_newY(int *y, char direction);
 
 extern char * map;
 extern int height;
@@ -30,8 +30,8 @@ int move_character(int * y, int * x, char direction, char character) {
     }
     
     // calculate the new coordinates to use on success (store in local variables)
-    newX=calculate_newX(*x);
-    newY=calculate_newY(*y);
+    newX=calculate_newX(*x, direction);
+    newY=calculate_newY(*y, direction);
     
     // check if the new coordinates point to a wall
     // at this point, the move is known to be valid (OK direction and not a wall)
@@ -49,11 +49,11 @@ int check_direction(char direction) {
     }
 }
 
-int calculate_newX(int *x){
-    return 0;
+int calculate_newX(int *x, char direction){
+    
 }
 
-int calculate_newY(int *y){
+int calculate_newY(int *y, char direction){
     return 0;
 }
 
