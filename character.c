@@ -40,17 +40,19 @@ int move_character(int * y, int * x, char direction, char character) {
     
     // at this point, the move is known to be valid (OK direction and not a wall)
     // remove character from the old position and replace with EMPTY
-    map[*y][*x] = EMPTY;
+    map[calculate_index(*x,*y)] = EMPTY;
     // set character in the new position in map
-    //map[newY][newX] = PLAYER;
+    map[calculate_index(newX,newY)] = PLAYER;
     // update the x/y coordinate pointers
-    //*x=newX;
-    //*y=newY;
+    *x=newX;
+    *y=newY;
     
     return MOVED_OKAY;
 }
 
 int calculate_index(int x,  int y){
+    int index = newY*width+newX;
+    return index;
 }
 
 int check_direction(char direction) {
@@ -80,8 +82,7 @@ int calculate_newY(int *y, char direction){
 }
 
 int check_wall_collision(int newX, int newY){
-    int index = newY*width+newX;
-    if(map[index]==WALL){
+    if(map[calculate_index(newX, newY)]==WALL){
         return 1;
     } else {
         return 0;
