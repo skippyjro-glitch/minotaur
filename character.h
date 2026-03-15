@@ -1,6 +1,8 @@
 // APSC 142 Engineering Programming Project Starter Code
 // Copyright Sean Kauffman 2026
 
+int check_direction(char direction);
+
 #ifndef PROJECT_CHARACTER_H
 #define PROJECT_CHARACTER_H
 
