@@ -101,8 +101,7 @@ int read_file(){
 }
 
 char* create_map_array(){
-    static int array[];
-    return array;
+    return 0;
 }
 
 int update_map_height(){
