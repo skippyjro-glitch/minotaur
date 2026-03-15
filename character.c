@@ -51,7 +51,7 @@ int move_character(int * y, int * x, char direction, char character) {
 }
 
 int calculate_index(int x,  int y){
-    int index = newY*width+newX;
+    int index = y*width+x;
     return index;
 }
 
