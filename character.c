@@ -5,8 +5,8 @@
 #include "character.h"
 
 int check_direction(char direction);
-int calculate_newX(*x);
-int calculate_newY(*y);
+int calculate_newX(int *x);
+int calculate_newY(int *y);
 
 extern char * map;
 extern int height;
@@ -49,11 +49,11 @@ int check_direction(char direction) {
     }
 }
 
-int calculate_newX(*x){
+int calculate_newX(int *x){
     return 0;
 }
 
-int calculate_newY(*y){
+int calculate_newY(int *y){
     return 0;
 }
 
