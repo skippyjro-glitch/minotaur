@@ -48,8 +48,21 @@ TEST_SUITE_BEGIN("Character tests");
     }
     TEST_CASE("check moving in viable direction"){
         CHECK(check_direction('w')==1);
+        CHECK(check_direction('s')==1);
+        CHECK(check_direction('a')==1);
+        CHECK(check_direction('d')==1);
+        CHECK(check_direction('z')==0);
     }
     TEST_CASE("check 'a' makes new x-direction one less than original"){
+        CHECK(calculate_newX(10, 'a')==9);
+    }
+    TEST_CASE("check 'd' makes new x-direction one more than original"){
+        CHECK(calculate_newX(10, 'a')==11);
+    }
+    TEST_CASE("check 'w' makes new y-direction one more than original"){
+        CHECK(calculate_newX(10, 'a')==11);
+    }
+    TEST_CASE("check 's' makes new y-direction one less than original"){
         CHECK(calculate_newX(10, 'a')==9);
     }
 // tests for charge_minotaur
