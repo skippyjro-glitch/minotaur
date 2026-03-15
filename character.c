@@ -22,12 +22,14 @@ int move_character(int * y, int * x, char direction, char character) {
     int invalid_direction;
     
     // check for an invalid direction (not LEFT, RIGHT, UP, or DOWN)
-    if (invalid_direction = check_direction(direction)){
-        return 0;
+    if (check_direction(direction)==0){
+        return MOVED_INVALID_DIRECTION;
     }
     
     // calculate the new coordinates to use on success (store in local variables)
-    // check if the new coordinates point to a wallg
+    
+    
+    // check if the new coordinates point to a wall
     // at this point, the move is known to be valid (OK direction and not a wall)
     // remove character from the old position and replace with EMPTY
     // set character in the new position in map
