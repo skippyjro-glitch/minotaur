@@ -88,7 +88,7 @@ TEST_SUITE_BEGIN("Character tests");
     height=12;
     width=11;
     char cell= WALL;
-    map=&cell
+    map=&cell;
     int x=1, y=1;
         CHECK(move_character(&y, &x, 'w', PLAYER)==MOVED_WALL);
     }
