@@ -27,24 +27,6 @@ int move_character(int * y, int * x, char direction, char character) {
     }
     
     // calculate the new coordinates to use on success (store in local variables)
-    /*int newY=*y;
-    int newX=*x;
-    switch(direction){
-        case 'w':
-            newY-=1;
-            break;
-        case 's':
-            newY+=1;
-            break;
-        case 'a':
-            newX-=1;
-            break;
-        case 'd':
-            newX+=1;
-            break;
-        default:
-            return MOVED_INVALID_DIRECTION; 
-    }*/
     // check if the new coordinates point to a wallg
     // at this point, the move is known to be valid (OK direction and not a wall)
     // remove character from the old position and replace with EMPTY
