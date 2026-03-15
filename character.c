@@ -39,7 +39,7 @@ int move_character(int * y, int * x, char direction, char character) {
             break;
         case 'd':
             newX+=1;
-            break
+            break;
         default:
             return MOVED_INVALID_DIRECTION; 
     }
