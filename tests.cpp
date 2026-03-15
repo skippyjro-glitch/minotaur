@@ -43,14 +43,14 @@ TEST_SUITE_BEGIN("Character tests");
 
 // Tests for locate_character
     TEST_CASE("does locate character find PLAYER?") {
-        int characterX=12;
-        int characterY=11;
+        int characterX=6;
+        int characterY=6;
         CHECK(locate_character(PLAYER,&characterY,&characterX) == FOUND_CHARACTER);
     }
 
     TEST_CASE("does locate character find MINOTAUR") {
-        int characterX=12;
-        int characterY=11;
+        int characterX=10;
+        int characterY=10;
         CHECK(locate_character(MINOTAUR,&characterY,&characterX) == FOUND_CHARACTER);
     }
 
