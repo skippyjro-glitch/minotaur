@@ -79,10 +79,10 @@ int calculate_newX(int x, char direction){
 
 int calculate_newY(int y, char direction){
     if(direction==DOWN){
-        return y-1;
+        return y+1;
     }
     if(direction==UP){
-        return y+1;
+        return y-1;
     }
     return y;
 }
