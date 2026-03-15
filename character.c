@@ -27,29 +27,31 @@ int move_character(int * y, int * x, char direction, char character) {
     int currentY = *y;
     int newX=0;
     int newY=0;
-    
+
     // check for an invalid direction (not LEFT, RIGHT, UP, or DOWN)
     if (check_direction(direction)==0){
         return MOVED_INVALID_DIRECTION;
     }
-    
+
     // calculate the new coordinates to use on success (store in local variables)
     newX=calculate_newX(currentX, direction);
     newY=calculate_newY(currentY, direction);
-    
+
     // check if the new coordinates point to a wall
-    int wall = check_wall_collision(newX, newY);
-    
-    // at this point, the move is known to be valid (OK direction and not a wall)
-    // remove character from the old position and replace with EMPTY
-    map[calculate_index(*x,*y)] = EMPTY;
-    // set character in the new position in map
-    map[calculate_index(newX,newY)] = PLAYER;
-    // update the x/y coordinate pointers
-    *x=newX;
-    *y=newY;
-    
-    return MOVED_OKAY;
+    if (check_wall_collision(newX, newY)==1) {
+        return MOVED_WALL;
+    } else {
+        // at this point, the move is known to be valid (OK direction and not a wall)
+        // remove character from the old position and replace with EMPTY
+        map[calculate_index(*x,*y)] = EMPTY;
+        // set character in the new position in map
+        map[calculate_index(newX,newY)] = PLAYER;
+        // update the x/y coordinate pointers
+        *x=newX;
+        *y=newY;
+
+        return MOVED_OKAY;
+    }
 }
 
 int calculate_index(int x,  int y){
@@ -72,6 +74,7 @@ int calculate_newX(int x, char direction){
     if(direction==RIGHT){
         return x+1;
     }
+    return x;
 }
 
 int calculate_newY(int y, char direction){
@@ -81,6 +84,7 @@ int calculate_newY(int y, char direction){
     if(direction==UP){
         return y+1;
     }
+    return y;
 }
 
 int check_wall_collision(int newX, int newY){
@@ -98,4 +102,3 @@ int charge_minotaur(int *y, int *x, int player_y, int player_x, char charge_dire
     // calculate the new coordinates
     return MOVED_OKAY;
 }
-
