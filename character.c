@@ -23,7 +23,7 @@ int move_character(int * y, int * x, char direction, char character) {
     
     // check for an invalid direction (not LEFT, RIGHT, UP, or DOWN)
     if (invalid_direction = check_direction(direction)){
-        break;
+        return 0;
     }
     
     // calculate the new coordinates to use on success (store in local variables)
