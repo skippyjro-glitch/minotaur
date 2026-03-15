@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "defines.h"
 #include "colours.h"
@@ -108,6 +109,13 @@ char* create_map_array(int size){
     char *maze = malloc(size);
     if(maze==NULL) return NULL;
     return maze;
+
+    /*int count=0;
+    for(int i=0;buffer[i]!='\0';i++){
+        if(buffer[i]!=' ' && buffer[i]!='\n' && buffer[i]!='\r'{
+            count++
+        }
+    }*/
 }
 
 int update_map_height(int *map_height){
