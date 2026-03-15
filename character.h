@@ -8,6 +8,12 @@ int check_wall_collision(int newX, int newY);
 int calculate_index(int x,  int y);
 int check_x_boundary(int x, int width);
 int check_y_boundary(int y, int height);
+int attempt_charge_step(int * p, int * x, char charge_direction);
+void break_wall_and_move(int * p, int * x, char charge_direction);
+int aligned(int player_y, int player_x, int minotaur_y, int minotaur_x);
+char determine_direction(int player_y, int player_x, int minotaur_y, int minotaur_x);
+int path_clear(int player_y, int player_x, int minotaur_y, int minotaur_x, char direction);
+
 
 #ifndef PROJECT_CHARACTER_H
 #define PROJECT_CHARACTER_H
@@ -65,7 +71,7 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x);
  * Preconditions: y and x must not be NULL
  * Postconditions: If the move is valid, y and x will be updated with
  *   the new coordinates, map will be updated at the old location with EMPTY,
- *   and the the new location will be filled with the symbol in character. Returns MOVED_OKAY.
+ *   and the new location will be filled with the symbol in character. Returns MOVED_OKAY.
  *   If the move is invalid, none of those updates will occur and the
  *   function will return the appropriate status code: MOVED_WALL or
  *   MOVED_INVALID_DIRECTION.
