@@ -40,24 +40,89 @@ TEST_SUITE_END();
 TEST_SUITE_BEGIN("Character tests");
 
 // Tests for sees_player
+    TEST_CASE("Minotaur sees player to the right") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', ' ', ' ', ' ',
+            'M', ' ', ' ', 'P', ' ',
+            ' ', ' ', ' ', ' ', ' '
+        };
+        map=test_map;
+        CHECK(sees_player(1,3,1,0)==RIGHT);
+    }
+    TEST_CASE("wall blocks line of sight") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', ' ', ' ', ' ',
+            'M', 'W', ' ', 'P', ' ',
+            ' ', ' ', ' ', ' ', ' '
+        };
+        map=test_map;
+        CHECK(sees_player(1,3,1,0)==SEES_NOTHING);
+    }
+    TEST_CASE("minotaur sees player above") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', 'P', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', 'M', ' ', ' '
+        };
+        map=test_map;
+        CHECK(sees_player(0,1,3,1)==UP);
+    }
+    TEST_CASE("minotaur and player are on same spot") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', 'M', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' '
+        };
+        map=test_map;
+        CHECK(sees_player(1,1,1,1)==CAUGHT_PLAYER);
+    }
 
 // Tests for locate_character
     TEST_CASE("does locate character find PLAYER?") {
-        int characterX=6;
-        int characterY=6;
-        CHECK(locate_character(PLAYER,&characterY,&characterX) == FOUND_CHARACTER);
+        height=3;
+        width=3;
+        char test_map[]={
+            ' ', 'P', ' ',
+            ' ', ' ', ' ',
+            ' ', ' ', ' '
+        };
+        map=test_map;
+        int y=-1,x=-1;
+        CHECK(locate_character('P',&y,&x) == FOUND_CHARACTER);
     }
 
     TEST_CASE("does locate character find MINOTAUR") {
-        int characterX=10;
-        int characterY=10;
-        CHECK(locate_character(MINOTAUR,&characterY,&characterX) == FOUND_CHARACTER);
+        height=3;
+        width=3;
+        char test_map[]={
+            'M', ' ', ' ',
+            ' ', ' ', ' ',
+            ' ', ' ', ' '
+        };
+        map=test_map;
+        int y=-1,x=-1;
+        CHECK(locate_character('M',&y,&x) == FOUND_CHARACTER);
     }
 
     TEST_CASE("does locate character find PLAYER?") {
-        int characterX=12;
-        int characterY=11;
-        CHECK(locate_character('z',&characterY,&characterX) == CHARACTER_NOT_FOUND);
+        height=3;
+        width=3;
+        char test_map[]={
+            ' ', ' ', ' ',
+            ' ', ' ', ' ',
+            ' ', ' ', ' '
+        };
+        map=test_map;
+        int y=5,x=5;
+        CHECK(locate_character('z',&y,&x) == CHARACTER_NOT_FOUND);
     }
 
 // Tests for move_character
@@ -112,6 +177,68 @@ TEST_SUITE_BEGIN("Character tests");
         CHECK(move_character(&y, &x, 'w', PLAYER)==MOVED_WALL);
     }
 // tests for charge_minotaur
+    TEST_CASE("minotaur moves two spaces") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', ' ', ' ', ' ',
+            ' ', 'M', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' '
+        };
+        map=test_map;
+        int y=1,x=1;
+        int result=charge_minotaur(&y,&x,-1,-1,RIGHT);
+        CHECK(result==MOVED_OKAY);
+        CHECK(y==1);
+        CHECK(x==3);
+        CHECK(map[calculate_index(3,1)]==MINOTAUR);
+    }
+    TEST_CASE("minotaur moves into a wall") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', ' ', ' ', ' ',
+            ' ', 'M', 'W', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' '
+        };
+        map=test_map;
+        int y=1,x=1;
+        int result=charge_minotaur(&y,&x,-1,-1,RIGHT);
+        CHECK(result==MOVED_WALL);
+        CHECK(y==1);
+        CHECK(x==2);
+        CHECK(map[calculate_index(2,1)]==MINOTAUR);
+    }
+    TEST_CASE("minotaur catches player") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', ' ', ' ', ' ',
+            ' ', 'M', ' ', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' '
+        };
+        map=test_map;
+        int y=1,x=1;
+        int result=charge_minotaur(&y,&x,1,2,RIGHT);
+        CHECK(result==CAUGHT_PLAYER);
+        CHECK(y==1);
+        CHECK(x==2);
+    }
+    TEST_CASE("minotaur moves in an invalid direction") {
+        height=3;
+        width=5;
+        char test_map[]={
+            ' ', ' ', ' ', ' ', ' ',
+            ' ', ' ', 'M', ' ', ' ',
+            ' ', ' ', ' ', ' ', ' '
+        };
+        map=test_map;
+        int y=1,x=1;
+        CHECK(charge_minotaur(&y,&x,-1,-1,'z')==MOVED_INVALID_DIRECTION);
+        CHECK(y==1);
+        CHECK(x==1);
+    }
+
 TEST_SUITE_END();
 
 /* tests for game.c */
