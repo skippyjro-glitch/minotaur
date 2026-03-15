@@ -42,6 +42,10 @@ TEST_SUITE_BEGIN("Character tests");
 // tests for sees_player
 
 // tests for move_character
+    TEST_CASE("check calculate index"){
+    width=11;
+        CHECK(calculate_index(3,4)==(4*width+3));
+    }
     TEST_CASE("check moving in viable direction"){
         CHECK(check_direction('w')==1);
     }
