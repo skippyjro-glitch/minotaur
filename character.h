@@ -4,6 +4,7 @@
 int check_direction(char direction);
 int calculate_newX(int *x, char direction);
 int calculate_newY(int *y, char direction);
+int check_wall_collision(int newX, int newY);
 
 #ifndef PROJECT_CHARACTER_H
 #define PROJECT_CHARACTER_H
