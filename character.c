@@ -23,6 +23,8 @@ char sees_player(int player_y, int player_x, int minotaur_y, int minotaur_x) {
 }
 
 int move_character(int * y, int * x, char direction, char character) {
+    int currentX = *x;
+    int currentY = *y;
     int newX=0;
     int newY=0;
     
@@ -32,8 +34,8 @@ int move_character(int * y, int * x, char direction, char character) {
     }
     
     // calculate the new coordinates to use on success (store in local variables)
-    newX=calculate_newX(*x, direction);
-    newY=calculate_newY(*y, direction);
+    newX=calculate_newX(currentX, direction);
+    newY=calculate_newY(currentY, direction);
     
     // check if the new coordinates point to a wall
     int wall = check_wall_collision(newX, newY);
