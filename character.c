@@ -65,19 +65,19 @@ int check_direction(char direction) {
 
 int calculate_newX(int x, char direction){
     if(direction==LEFT){
-        return *x-1;
+        return x-1;
     }
     if(direction==RIGHT){
-        return *x+1;
+        return x+1;
     }
 }
 
 int calculate_newY(int y, char direction){
     if(direction==DOWN){
-        return *y-1;
+        return y-1;
     }
     if(direction==UP){
-        return *y+1;
+        return y+1;
     }
 }
 
