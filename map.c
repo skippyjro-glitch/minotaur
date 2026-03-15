@@ -107,7 +107,6 @@ int read_file(char *filename){
 char* create_map_array(int size){
     char *maze = malloc(size);
     if(maze==NULL) return NULL;
-    memset(maze,'.',10);
     return maze;
 }
 
