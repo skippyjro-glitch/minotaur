@@ -7,6 +7,7 @@
 int check_direction(char direction);
 int calculate_newX(int *x, char direction);
 int calculate_newY(int *y, char direction);
+int check_wall_collision(int newX, int newY);
 
 extern char * map;
 extern int height;
@@ -34,6 +35,8 @@ int move_character(int * y, int * x, char direction, char character) {
     newY=calculate_newY(*y, direction);
     
     // check if the new coordinates point to a wall
+    int wall = check_wall_collision(newX, newY);
+    
     // at this point, the move is known to be valid (OK direction and not a wall)
     // remove character from the old position and replace with EMPTY
     // set character in the new position in map
@@ -65,6 +68,9 @@ int calculate_newY(int *y, char direction){
     if(direction==UP){
         return *y+1;
     }
+}
+
+int check_wall_collision(int newX, int newY){
 }
 
 
