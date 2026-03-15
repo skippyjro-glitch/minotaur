@@ -100,9 +100,9 @@ char *load_map(char *filename, int *map_height, int *map_width) {
 int open_file(char *filename){
     FILE *fp=fopen(filename,"r");
     if (!fp){
-        return 0;
+        return -1;
     } fclose(fp);
-    return 1;
+    return 0;
 }
 
 char* create_map_array(int size){
