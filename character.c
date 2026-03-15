@@ -45,7 +45,7 @@ int move_character(int * y, int * x, char direction, char character) {
         // remove character from the old position and replace with EMPTY
         map[calculate_index(*x,*y)] = EMPTY;
         // set character in the new position in map
-        map[calculate_index(newX,newY)] = PLAYER;
+        map[calculate_index(newX,newY)] = character;
         // update the x/y coordinate pointers
         *x=newX;
         *y=newY;
