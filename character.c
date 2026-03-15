@@ -71,6 +71,7 @@ int calculate_newY(int *y, char direction){
 }
 
 int check_wall_collision(int newX, int newY){
+    return 0;
 }
 
 
