@@ -50,11 +50,21 @@ int check_direction(char direction) {
 }
 
 int calculate_newX(int *x, char direction){
-    
+    if(direction=='a'){
+        return *x-1;
+    }
+    if(direction=='d'){
+        return *x+1;
+    }
 }
 
 int calculate_newY(int *y, char direction){
-    return 0;
+    if(direction=='s'){
+        return *y-1;
+    }
+    if(direction=='w'){
+        return *y+1;
+    }
 }
 
 
