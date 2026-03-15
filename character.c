@@ -9,6 +9,8 @@ int calculate_newX(int x, char direction);
 int calculate_newY(int y, char direction);
 int check_wall_collision(int newX, int newY);
 int calculate_index(int x,  int y);
+int check_x_boundary(int x, int width);
+int check_y_boundary(int y, int height);
 
 extern char * map;
 extern int height;
@@ -38,7 +40,7 @@ int move_character(int * y, int * x, char direction, char character) {
     newY=calculate_newY(currentY, direction);
 
     // check if the new coordinates point to a wall
-    if (check_wall_collision(newX, newY)==1) {
+    if (check_x_boundary(newX,width) || check_y_boundary(newY, height)||check_wall_collision(newX, newY)==1) {
         return MOVED_WALL;
     } else {
         // at this point, the move is known to be valid (OK direction and not a wall)
@@ -49,7 +51,6 @@ int move_character(int * y, int * x, char direction, char character) {
         // update the x/y coordinate pointers
         *x=newX;
         *y=newY;
-
         return MOVED_OKAY;
     }
 }
@@ -85,6 +86,18 @@ int calculate_newY(int y, char direction){
         return y-1;
     }
     return y;
+}
+
+int check_x_boundary(int x, int width) {
+    if (x<0 || x>=width) {
+        return 1;
+    } return 0;
+}
+
+int check_y_boundary(int y, int height) {
+    if (y<0 || y>=height) {
+        return 1;
+    } return 0;
 }
 
 int check_wall_collision(int newX, int newY){
