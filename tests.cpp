@@ -46,7 +46,8 @@ TEST_SUITE_BEGIN("Character tests");
         CHECK(check_direction('w')==1);
     }
     TEST_CASE("check 'a' makes new x-direction one less than original"){
-        CHECK(calculate_newX(10, 'a')==9);
+        int x=10;
+        CHECK(calculate_newX(&x, 'a')==9);
     }
 // tests for charge_minotaur
 TEST_SUITE_END();
