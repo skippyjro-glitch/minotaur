@@ -65,6 +65,31 @@ TEST_SUITE_BEGIN("Character tests");
     TEST_CASE("check 's' makes new y-direction one less than original"){
         CHECK(calculate_newY(10, 's')==11);
     }
+    TEST_CASE("check within wall boundaries") {
+    height=12;
+    width=11;
+        CHECK(check_x_boundary(-1,width)==1);
+        CHECK(check_x_boundary(11,width)==1);
+        CHECK(check_x_boundary(2,width)==0);
+
+        CHECK(check_y_boundary(-1,height)==1);
+        CHECK(check_y_boundary(12,height)==1);
+        CHECK(check_y_boundary(2,height)==0);
+    }
+    TEST_CASE("move_character moves into empty spaces") {
+    height=12;
+    width=11;
+    int x=1, y=1;
+        CHECK(move_character(&y, &x, 'w', PLAYER)==MOVED_OKAY);
+        CHECK(x==2);
+        CHECK(y==1);
+    }
+    TEST_CASE("move_character hits wall") {
+    height=12;
+    width=11;
+    int x=1, y=1;
+        CHECK(move_character(&y, &x, 'w', PLAYER)==MOVED_WALL);
+    }
 // tests for charge_minotaur
 TEST_SUITE_END();
 
@@ -81,7 +106,7 @@ TEST_SUITE_BEGIN("Game tests");
         CHECK(check_win(1,0)==1);
         CHECK(check_win(12,10)==1);
         CHECK(check_win(11, 11)==1);
-        CHECK(check_win(11,10)==0);
+        CHECK(check_win(10,9)==0);
         CHECK(check_win(1,1)==0);
     }
 // test for check_loss
