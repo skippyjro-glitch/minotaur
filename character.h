@@ -2,8 +2,8 @@
 // Copyright Sean Kauffman 2026
 
 int check_direction(char direction);
-int calculate_newX(int *x, char direction);
-int calculate_newY(int *y, char direction);
+int calculate_newX(int x, char direction);
+int calculate_newY(int y, char direction);
 int check_wall_collision(int newX, int newY);
 int calculate_index(int x,  int y);
 
