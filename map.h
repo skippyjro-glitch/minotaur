@@ -5,7 +5,7 @@
 #define PROJECT_MAP_H
 
 /** Functions required to be implemented **/
-int read_file(char *filename);
+int open_file(char *filename);
 char* create_map_array(int size);
 int update_map_height(int *map_height);
 int update_map_width(int *map_width, int count);
