@@ -39,9 +39,28 @@ TEST_SUITE_END();
 /* tests for character.c */
 TEST_SUITE_BEGIN("Character tests");
 
-// tests for sees_player
+// Tests for sees_player
 
-// tests for move_character
+// Tests for locate_character
+    TEST_CASE("does locate character find PLAYER?") {
+        int characterX=12;
+        int characterY=11;
+        CHECK(locate_character(PLAYER,&characterY,&characterX) == FOUND_CHARACTER);
+    }
+
+    TEST_CASE("does locate character find MINOTAUR") {
+        int characterX=12;
+        int characterY=11;
+        CHECK(locate_character(MINOTAUR,&characterY,&characterX) == FOUND_CHARACTER);
+    }
+
+    TEST_CASE("does locate character find PLAYER?") {
+        int characterX=12;
+        int characterY=11;
+        CHECK(locate_character('z',&characterY,&characterX) == CHARACTER_NOT_FOUND);
+    }
+
+// Tests for move_character
     TEST_CASE("check calculate index"){
     width=11;
         CHECK(calculate_index(3,4)==(4*width+3));
