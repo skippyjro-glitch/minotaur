@@ -32,8 +32,8 @@ int move_character(int * y, int * x, char direction, char character) {
     }
     
     // calculate the new coordinates to use on success (store in local variables)
-    newX=calculate_newX(*x, direction);
-    newY=calculate_newY(*y, direction);
+    newX=calculate_newX(x, direction);
+    newY=calculate_newY(y, direction);
     
     // check if the new coordinates point to a wall
     int wall = check_wall_collision(newX, newY);
