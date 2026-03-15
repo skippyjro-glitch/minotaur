@@ -34,12 +34,9 @@ int move_character(int * y, int * x, char direction, char character) {
 }
 
 int check_direction(char direction) {
-    //int newY=*y;
-    //int newX=*x;
-
-    return 0;
-
-    /* switch(direction){
+    int newY=*y;
+    int newX=*x;
+    switch(direction){
         case 'w':
             newY-=1;
             break;
@@ -54,7 +51,7 @@ int check_direction(char direction) {
             break
         default:
             return MOVED_INVALID_DIRECTION; 
-    } */
+    }
 }
 
 
