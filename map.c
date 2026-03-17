@@ -94,10 +94,65 @@ int locate_character(char character, int* character_y, int* character_x) {
 
 
 char *load_map(char *filename, int *map_height, int *map_width) {
-    return NULL;
+    FILE*fp=fopen(filename,"r');
+    if(!fp){
+        return NULL;
+    }
+    char *map=NULL;
+    int width=0;;
+    int height=0;
+
+    char maze[64];
+
+    while(fgets(maze,sizeof(line),fp)){
+        if(maze[0]=='\n' || mze[0] =='\0'){
+            continue;
+        }    
+        int maze_width=0;
+
+        for(int i=0;maze[i]!='\0';i+=3){
+            char temp = maze[i];
+
+            if(temp=='\n\ || temp=='\0'){
+                break;
+            }
+
+            if(temp!=PLAYER && temp!=MINOTAUR && temp!=WALL && temp!=EMPTY){
+                free(map);
+                fclose(fp);
+                return NULL;
+            }
+
+            char *new_map=realloc(map,(height*width+maze_width+1)*sizeof(temp));
+            if(!new_map){
+                free(map);
+                fclose(fp);
+                return NULL;
+            }
+            map=new_map;
+            map[height*width+maze_width]=temp;
+            maze_width++;
+        }
+        if(height==0){
+            width=maze_width;
+        } else if(maze_width!=width){
+            free(map);
+            fclose(fp);
+            return NULL;
+        }
+        height++;
+    }
+    fclose(fp);
+    if(height==0 || width==0){
+        free(map);
+        return NULL;
+    }
+    *map_height=height;
+    *map_width=width;
+    return map;
 }
 
-int open_file(char *filename){
+/*int open_file(char *filename){
     FILE *fp=fopen(filename,"r");
     if (!fp){
         return -1;
@@ -109,13 +164,6 @@ char* create_map_array(int size){
     char *maze = malloc(size);
     if(maze==NULL) return NULL;
     return maze;
-
-    /*int count=0;
-    for(int i=0;buffer[i]!='\0';i++){
-        if(buffer[i]!=' ' && buffer[i]!='\n' && buffer[i]!='\r'{
-            count++
-        }
-    }*/
 }
 
 int update_map_height(int *map_height){
@@ -131,5 +179,12 @@ int update_map_width(int *map_width, int count){
 }
 
 int update_map_array(char **map, int *allocated, int *used, char *row, int width){
+    if(*allocated==0){
+        *allocated=64;
+        *map=malloc(*allocated);
+        if(!*map) return 0;
+    }
+
+    if(*used
     return 0;
-}
+}*/
