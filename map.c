@@ -94,18 +94,18 @@ int locate_character(char character, int* character_y, int* character_x) {
 
 
 char *load_map(char *filename, int *map_height, int *map_width) {
-    FILE*fp=fopen(filename,"r');
+    FILE*fp=fopen(filename,"r");
     if(!fp){
         return NULL;
     }
     char *map=NULL;
-    int width=0;;
+    int width=0;
     int height=0;
 
     char maze[64];
 
-    while(fgets(maze,sizeof(line),fp)){
-        if(maze[0]=='\n' || mze[0] =='\0'){
+    while(fgets(maze,sizeof(maze),fp)){
+        if(maze[0]=='\n' || maze[0] =='\0'){
             continue;
         }    
         int maze_width=0;
@@ -113,7 +113,7 @@ char *load_map(char *filename, int *map_height, int *map_width) {
         for(int i=0;maze[i]!='\0';i+=3){
             char temp = maze[i];
 
-            if(temp=='\n\ || temp=='\0'){
+            if(temp=='\n' || temp=='\0'){
                 break;
             }
 
@@ -123,7 +123,7 @@ char *load_map(char *filename, int *map_height, int *map_width) {
                 return NULL;
             }
 
-            char *new_map=realloc(map,(height*width+maze_width+1)*sizeof(temp));
+            char *new_map=realloc(map,(height*width+maze_width+1)*sizeof(char));
             if(!new_map){
                 free(map);
                 fclose(fp);
