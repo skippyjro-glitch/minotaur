@@ -1,5 +1,5 @@
 // APSC 142 Engineering Programming Project Starter Code
-// Copyright Sean Kauffman 2026
+// Copyright Sean Kauffman 2024
 
 // Don't forget to update your project configuration to select "Emulate terminal in the output console"
 
@@ -22,16 +22,16 @@ void update_minotaur(int player_y, int player_x, int *minotaur_y, int *minotaur_
 // Almost every function needs these variables, so keeping them as globals helps keep things organized.
 // map is a pointer to a dynamically allocated map for displaying to the user
 char *map = NULL;
-// width and height store the width and height of map, NOT counting outer walls
+// width and height store the width and height of map
 int width, height;
 
 /**
  * This is the hardcoded map used for labs 1-3.
  * Once you implement load_map in lab 4 you should remove this map, as it cannot be used for the
  * final version of the project.
- * The map's dimensions are 9x9
+ * The map's dimensions are 11x12
  */
-#define HARDCODED_WIDTH 11
+/*#define HARDCODED_WIDTH 11
 #define HARDCODED_HEIGHT 12
 char hardcoded_map[] = {
     WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL,
@@ -46,17 +46,17 @@ char hardcoded_map[] = {
     WALL, EMPTY, EMPTY, EMPTY, EMPTY, WALL, EMPTY, EMPTY, MINOTAUR, EMPTY, WALL,
     WALL, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, WALL,
     WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL
-};
+};*/
 // You are NOT allowed to add more global variables!
 // The globals that are included in the starter code provide a convenient way to share information
 // between the many functions that all need access to the same data, but all other data must be
-// passed using function arguments.  If you add new globals, the autograder tests will fail to run
+// passed using function arguments. If you add new globals, the autograder tests will fail to run
 // and you will not receive a good mark.
 
 /**
  * Main entry point into your program.
  * Make sure that main returns appropriate status codes depending on what
- * happens.  The codes you must use are:
+ * happens. The codes you must use are:
  *   NO_ERROR when no error occurs
  *   ERR_NO_MAP when no map file is found
  *   ERR_NO_PLAYER when no player is found on the map
@@ -75,18 +75,36 @@ int main(void) {
     char charge_direction = SEES_NOTHING;
 
     // Set the width and height for the hardcoded map
-    width = HARDCODED_WIDTH;
-    height = HARDCODED_HEIGHT;
+    //width = HARDCODED_WIDTH;
+    //height = HARDCODED_HEIGHT;
     // Use the hardcoded map by setting the global map variable equal to it
-    map = hardcoded_map;
+    //map = hardcoded_map;
+    map=load_map("map.txt", &height, &width);
+    if (!map) {
+        return ERR_NO_MAP;
+    }
+
+    int player_y;
+    int player_x;
+    if (locate_character(PLAYER, &player_y, &player_x)==CHARACTER_NOT_FOUND) {
+        free(map);
+        return ERR_NO_PLAYER;
+    }
+
+    int minotaur_y;
+    int minotaur_x;
+    if (locate_character(MINOTAUR, &minotaur_y, &minotaur_x)==CHARACTER_NOT_FOUND) {
+        free(map);
+        return ERR_NO_MINOTAUR;
+    }
 
     // Eventually, the player position should be determined from the map, however, hardcode it for now
-    int player_y = 5;
-    int player_x = 5;
+    //int player_y = 5;
+    //int player_x = 5;
 
     // We also need the Minotaur position. Again, hardcode the starting position for now.
-    int minotaur_y = 9;
-    int minotaur_x = 8;
+    //int minotaur_y = 9;
+    //int minotaur_x = 8;
 
     // Loop until we hit the end of input
     // Input holds the user input
@@ -94,20 +112,37 @@ int main(void) {
     while (input != EOF && input != 4) {
         // Print the map
         print_map();
-
         // Get a character - blocks until one is input
         input = getch();
+
+        if (input=='g') {
+            print_revealed_map(player_y, player_x);
+            continue;
+        }
 
         // update the minotaur
         update_minotaur(player_y, player_x, &minotaur_y, &minotaur_x, &charge_direction);
 
         // move the player only if they haven't been caught
         if (check_loss(player_y, player_x, minotaur_y, minotaur_x) == KEEP_GOING) {
-            move_character(&player_y, &player_x, input, PLAYER);
+                move_character(&player_y, &player_x, input, PLAYER);
         }
-    } // quit if we hit the end of input
+
+        if (check_loss(player_y, player_x, minotaur_y, minotaur_x)==YOU_LOSE) {
+        printf("Sorry, you lose. \n");
+            break;
+        }
+
+        if (check_win(player_y, player_x)==YOU_WIN) {
+            printf("Congratulations! You win! \n");
+            break;
+        }
+
+    }
+     // quit if we hit the end of input
 
     // You must return the correct error code from defines.h from main depending on what happened
+    free(map);
     return NO_ERROR;
 }
 
@@ -153,3 +188,6 @@ void update_minotaur(int player_y, int player_x, int *minotaur_y, int *minotaur_
         }
     }
 }
+
+
+
