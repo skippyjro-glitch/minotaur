@@ -111,14 +111,12 @@ int main(void) {
     char input = 0;
     while (input != EOF && input != 4) {
         // Print the map
-        print_map();
-        // Get a character - blocks until one is input
-        input = getch();
-
         if (input=='g') {
             print_revealed_map(player_y, player_x);
             continue;
         }
+        // Get a character - blocks until one is input
+        input = getch();
 
         // update the minotaur
         update_minotaur(player_y, player_x, &minotaur_y, &minotaur_x, &charge_direction);
