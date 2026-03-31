@@ -48,9 +48,6 @@ void print_map(void) {
     for (int y = 0; y<height; y++) {
         for (int x=0; x<width; x++) {
             printc(map[y*width+x]); //converts 2D coordinate to 1D
-            if (x<width-1) {
-                printf(" ");
-            }
         }
         printf("\n");
     }
