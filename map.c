@@ -9,7 +9,7 @@
 #include "colours.h"
 #include "map.h"
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 256
 
 
 extern char *map;
@@ -59,7 +59,7 @@ void print_map(void) {
 
 void print_revealed_map(int player_y, int player_x) {
     // Only the map within PLAYER_VISION_DISTANCE of the player (including diagonals) should be printed
-    for (int y=0; y<height;y++) {
+    for (int y=0; y<height; y++) {
         for (int x=0; x<width; x++) {
             int dy = y-player_y; //position - player location in y
             int dx = x-player_x; //position - player location in x
@@ -70,121 +70,109 @@ void print_revealed_map(int player_y, int player_x) {
                 change_text_colour(WHITE); //WHITE shows empty space
                 printf(" ");
             }
+
+            if (x<width-1) {
+                printf(" ");
+            }
         }
         printf("\n");
     }
-    printf("\n");
 }
 
 int locate_character(char character, int* character_y, int* character_x) {
     // Attempt to find the character in the map and return a status code indicating
-    // if they were present
-    for (int y=0; y<height; y++) {
-        for (int x=0; x<width; x++) {
-            //checks if there's a character in the map
-            if (map[y*width+x]==character) {
-                *character_y=y;
-                *character_x=x;
-                return FOUND_CHARACTER;
-            }
+    for (int i = 0; i < height * width; i++) {
+        if (map[i] == character) {
+            *character_x = i % width;
+            *character_y = i / width;
+            return FOUND_CHARACTER;
         }
     }
     return CHARACTER_NOT_FOUND;
+
 }
 
-
 char *load_map(char *filename, int *map_height, int *map_width) {
-    FILE*fp=fopen(filename,"r");
-    if(!fp){
-        return NULL;
-    }
-    char *map=NULL;
-    int width=0;
-    int height=0;
+    FILE *file = fopen(filename, "r");
+    if (!file) return NULL;
 
-    char maze[64];
+    int width = -1;
+    int height = 0;
+    int current_width = 0;
+    int c;
 
-    while(fgets(maze,sizeof(maze),fp)){
-        if(maze[0]=='\n' || maze[0] =='\0'){
-            continue;
-        }    
-        int maze_width=0;
-
-        for(int i=0;maze[i]!='\0';i+=3){
-            char temp = maze[i];
-
-            if(temp=='\n' || temp=='\0'){
-                break;
+    // 🔹 First pass: determine width & height
+    while ((c = fgetc(file)) != EOF) {
+        if (c == '\n') {
+            if (width == -1) {
+                width = current_width;
+            } else if (current_width != width) {
+                fclose(file);
+                return NULL; // ❗ inconsistent row length
             }
-
-            if(temp!=PLAYER && temp!=MINOTAUR && temp!=WALL && temp!=EMPTY){
-                free(map);
-                fclose(fp);
-                return NULL;
-            }
-
-            char *new_map=realloc(map,(height*width+maze_width+1)*sizeof(char));
-            if(!new_map){
-                free(map);
-                fclose(fp);
-                return NULL;
-            }
-            map=new_map;
-            map[height*width+maze_width]=temp;
-            maze_width++;
+            height++;
+            current_width = 0;
+        } else if (c != '\r') {
+            current_width++; // count EVERYTHING (including spaces)
         }
-        if(height==0){
-            width=maze_width;
-        } else if(maze_width!=width){
-            free(map);
-            fclose(fp);
+    }
+
+    // Handle last line
+    if (current_width > 0) {
+        if (width == -1) {
+            width = current_width;
+        } else if (current_width != width) {
+            fclose(file);
             return NULL;
         }
         height++;
     }
-    fclose(fp);
-    if(height==0 || width==0){
-        free(map);
+
+    if (width <= 0 || height <= 0) {
+        fclose(file);
         return NULL;
     }
-    *map_height=height;
-    *map_width=width;
+
+    char *map = malloc(width * height);
+    if (!map) {
+        fclose(file);
+        return NULL;
+    }
+
+    // 🔹 Second pass: fill map row-by-row
+    rewind(file);
+
+    int x = 0, y = 0;
+
+    while ((c = fgetc(file)) != EOF) {
+        if (c == '\n') {
+            if (x != width) {
+                free(map);
+                fclose(file);
+                return NULL;
+            }
+            y++;
+            x = 0;
+        } else if (c != '\r') {
+            if (x < width && y < height) {
+                map[y * width + x] = (char)c;
+                x++;
+            }
+        }
+    }
+
+    // Handle last line
+    if (x > 0) {
+        if (x != width) {
+            free(map);
+            fclose(file);
+            return NULL;
+        }
+    }
+
+    fclose(file);
+
+    *map_width = width;
+    *map_height = height;
     return map;
 }
-
-/*int open_file(char *filename){
-    FILE *fp=fopen(filename,"r");
-    if (!fp){
-        return -1;
-    } fclose(fp);
-    return 0;
-}
-
-char* create_map_array(int size){
-    char *maze = malloc(size);
-    if(maze==NULL) return NULL;
-    return maze;
-}
-
-int update_map_height(int *map_height){
-    (*map_height)++;
-    return *map_height;
-}
-
-int update_map_width(int *map_width, int count){
-    if(*map_width==-1){
-        *map_width=count;
-    }
-    return *map_width;
-}
-
-int update_map_array(char **map, int *allocated, int *used, char *row, int width){
-    if(*allocated==0){
-        *allocated=64;
-        *map=malloc(*allocated);
-        if(!*map) return 0;
-    }
-
-    if(*used
-    return 0;
-}*/
